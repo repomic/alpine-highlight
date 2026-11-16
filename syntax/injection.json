@@ -1,0 +1,66 @@
+{
+	"scopeName": "custom-js-tag.injection",
+	"injectionSelector": "L:text.html -comment -string",
+	"patterns": [
+		{
+			"include": "#alpine-slot"
+		}
+	],
+	"repository": {
+		"alpine-slot": {
+			"begin": "(<)(x-slot:alpine)\\s*[^>]*(>)",
+			"end": "(</)(x-slot:alpine)\\s*(>)",
+			"beginCaptures": {
+				"1": {
+					"name": "punctuation.definition.tag.begin.html"
+				},
+				"2": {
+					"name": "entity.name.tag.html"
+				},
+				"3": {
+					"name": "punctuation.definition.tag.end.html"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.tag.begin.html"
+				},
+				"2": {
+					"name": "entity.name.tag.html"
+				},
+				"3": {
+					"name": "punctuation.definition.tag.end.html"
+				}
+			},
+			"contentName": "meta.embedded.block.javascript",
+			"patterns": [
+				{
+					"include": "#blade-echo"
+				},
+				{
+					"include": "source.js"
+				}
+			]
+		},
+		"blade-echo": {
+			"begin": "\\{\\{|\\{!!",
+			"end": "\\}\\}|!!\\}",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.section.embedded.begin.php"
+				}
+			},
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.section.embedded.end.php"
+				}
+			},
+			"contentName": "meta.embedded.line.php",
+			"patterns": [
+				{
+					"include": "source.php"
+				}
+			]
+		}
+	}
+}
